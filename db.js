@@ -1,6 +1,5 @@
-const config = require('./config/config.js')
+const config = require('./config/config.json')
 const { Sequelize } = require('sequelize')
-require('dotenv').config()
 
 const sequelize = new Sequelize(
   process.env.MYSQL_DATABASE || config.development.database,
@@ -8,8 +7,8 @@ const sequelize = new Sequelize(
   process.env.MYSQL_PASSWORD || config.development.password,
   {
     host: process.env.MYSQL_HOST || config.development.host,
-    port: process.env.MYSQL_PORT || config.development.port,
-    dialect: process.env.MYSQL_DIALECT || config.development.dialect,
+    port: process.env.MYSQL_PORT || config.development.port || '3309',
+    dialect: 'mysql',
     operatorAliases: false,
     pool: {
       max: 5, // maximum number of connection in pool

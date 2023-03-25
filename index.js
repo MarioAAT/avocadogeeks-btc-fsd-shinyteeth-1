@@ -12,6 +12,13 @@ const server = express()
 // Import and configure dotenv using commonjs
 require('dotenv').config()
 
+let corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}
+
 // Server must use CORS
 server.use(cors())
 

@@ -73,7 +73,10 @@ module.exports = class UserCtrl {
   // CRUD: (R) Retrive user data from database. The user ID received in request parameter
   static async apiGetUserById (req, res) {
     try {
-      const response = await tbl_User.findByPk(req.params.id, {
+
+      const userId = req.userId;
+
+      const response = await tbl_User.findByPk(userId, {
         attributes: ['id', 'first_name', 'middle_name', 'last_name', 'mobile_phone', 'email', 'createdAt', 'updatedAt']
       })
       if (!response) {

@@ -1,4 +1,4 @@
-# Welcome to my backend app
+# Welcome to my backend app "Shinny Teeth"
 
 <details>
   <summary>Contenido 📝</summary>
@@ -32,10 +32,6 @@ Technologies:
 <div align="center">
 <a href="https://www.mysql.com/">
     <img src= "https://img.shields.io/badge/mysql-3E6E93?style=for-the-badge&logo=mysql&logoColor=white"/>
-</a>
-<a href="https://www.mysql.com/"> 
-    <img src= ""/> 
-</a>
 <a href="https://www.expressjs.com/">
     <img src= "https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/>
 </a>
@@ -49,7 +45,7 @@ Technologies:
 
 
 ## Diagram DB
-!['imagen-db'](./images/sampleDb.png)
+![image](https://user-images.githubusercontent.com/122813777/222984254-ce404dc5-8d44-4d41-abcd-830ff68e0e0b.png)
 
 ## local installation
 1. We need to have NodeJS installed
@@ -71,6 +67,14 @@ Some of the endpoints can only be viewed if you have an administrator role
     - WELCOME
     
             GET http://localhost:3000/api/
+
+    - COMPLETE THE PROFILE
+    
+            PUT http://localhost:3000/api/updateprofile
+
+    - RESET PASSWORD
+    
+            PUT http://localhost:3000/api/resetpass
     
     - REGISTER
 
@@ -78,7 +82,7 @@ Some of the endpoints can only be viewed if you have an administrator role
         body:
         ``` js
             {
-                "email": "zulia.garcia@gmail.com",
+                "email": "ejemplo.ejemplo@gmail.com",
                 "password": "abc123"
             }
         ```
@@ -89,7 +93,7 @@ Some of the endpoints can only be viewed if you have an administrator role
         body:
         ``` js
             {
-                "email": "zulia.garcia@gmail.com",
+                "email": "ejemplo.ejemplo@gmail.com",
                 "password": "abc123"
             }
         ```
@@ -106,7 +110,7 @@ Some of the endpoints can only be viewed if you have an administrator role
                 "middle_name": "García",
                 "last_name": "Perez",
                 "mobile_phone": "607555333",
-                "email": "kiko@hotmail.com",
+                "email": "nombre@hotmail.com",
                 "password_hash": "X3qUgMAJJk72akja62JY"
             }
         ```
@@ -225,3 +229,4 @@ This project is licensed under "MIT License"
 
 - **Mario Aguilar**  
 <a href="https://github.com/MarioAAT" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
+
