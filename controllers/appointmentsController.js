@@ -7,6 +7,7 @@
 /* eslint-disable camelcase */
 
 // Section where we declare the necessary imports for this module
+const { Op } = require('sequelize')
 const { tbl_Appointment } = require('../models/index')
 const AppointmentService = require('../services/appointmentsService')
 
@@ -21,9 +22,10 @@ module.exports = class AppointmentCtrl {
         treatment_id: req.body.treatment_id,
         appointment_on: req.body.appointment_on,
         start_at: req.body.start_at,
-        end_at: req.body.end_at
+        // end_at: req.body.end_at,
+        patient_id: req.body.patient_id
       }
-      newAppointment.patient_id = (req.roleId === 2) ? req.patientId : req.body.patient_id
+      // newAppointment.patient_id = (req.roleId === 2) ? req.patientId : req.body.patient_id
 
       // Call appointment servise with data
       const appointment = await AppointmentService.addAppointment(newAppointment)
@@ -185,6 +187,39 @@ module.exports = class AppointmentCtrl {
       const appointments = await tbl_Appointment.findAll({
         order: [['appointment_on', 'ASC']],
         where: { patient_id: req.patientId }
+      })
+      // Check no appointments found
+      if (appointments.length === 0) {
+        return res.status(404).json({
+          sucess: false,
+          message: 'Sorry! - You do not have future appointments.'
+        })
+      }
+      // Return appoiment list
+      return res.status(201).json({
+        sucess: true,
+        message: 'Sucess! - These are the appointments that you have arranged for the future.',
+        appointments
+      })
+    } catch (error) {
+      return res.status(500).json({
+        sucess: false,
+        message: 'Error! - Something has gone wrong.',
+        error
+      })
+    }
+  }
+
+  static async apiGetAllUsersAppointments (req, res) {
+    try {
+      // Searches all the appointments of the patient in the database
+      console.log('Hemos llegado al método de controlador apiGetAllAppointments')
+
+      const appointments = await tbl_Appointment.findAll({
+        order: [['appointment_on', 'ASC']],
+        attributes: ['id', 'patient_id', 'professional_id', 'treatment_id', 'appointment_on', 'start_at'],
+        where: { id: { [Op.ne]: 4 } }
+        // where: { appointment_id: req.appointmetnId }
       })
       // Check no appointments found
       if (appointments.length === 0) {

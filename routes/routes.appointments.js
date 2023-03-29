@@ -28,7 +28,7 @@ const isAdmin = require('../middlewares/isAdmin')
 */
 
 // Appointments endpoints available for patients
-router.post('/patient/appointments', verifyToken, isPatient, AppointmentsCtrl.apiAddAppointment)
+router.post('/patient/appointments', verifyToken, AppointmentsCtrl.apiAddAppointment)
 router.get('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiGetAppointmentById)
 router.put('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiUpdateAppointment)
 router.delete('/patient/appointments/:id', verifyToken, isPatient, AppointmentsCtrl.apiDeleteAppointment)
@@ -46,6 +46,6 @@ router.post('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiAddAppoin
 router.get('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiGetAppointmentById)
 router.put('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiUpdateAppointment)
 router.delete('/appointments/:id', verifyToken, isAdmin, AppointmentsCtrl.apiDeleteAppointment)
-router.get('/appointments', verifyToken, isAdmin, AppointmentsCtrl.apiGetAllDocAppointments)
+router.get('/allappointments', verifyToken, AppointmentsCtrl.apiGetAllUsersAppointments)
 
 module.exports = router

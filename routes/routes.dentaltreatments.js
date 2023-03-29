@@ -8,6 +8,6 @@ router.post('/dentaltreatments', verifyToken, isAdmin, DentTreatCtrl.apiAddDentT
 router.put('/dentaltreatments/:id', verifyToken, isAdmin, DentTreatCtrl.apiUpdateDentTreat)
 router.get('/dentaltreatments/:id', verifyToken, DentTreatCtrl.apiGetDentTreatById)
 router.delete('/dentaltreatments/:id', verifyToken, isAdmin, DentTreatCtrl.apiDeleteDentTreat)
-router.get('/dentaltreatments', verifyToken, DentTreatCtrl.apiGetAllDentTreat)
+router.get('/dentaltreatments', DentTreatCtrl.apiGetAllDentTreat)
 
 module.exports = router
