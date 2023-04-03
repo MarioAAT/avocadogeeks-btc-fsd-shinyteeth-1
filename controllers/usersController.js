@@ -8,16 +8,20 @@
 
 // Section where we declare the necessary imports for this module
 const { Op } = require('sequelize')
-const { tbl_User } = require('../models/index')
+const { tbl_User, tbl_Patient } = require('../models/index')
 
 // Controller class UserCtrl
 module.exports = class UserCtrl {
   // CRUD: (C) Create a new user record in the database. Data passed in body request
   static async apiAddUser (req, res) {
     try {
+      const patient = await tbl_Patient.create({
+        ehr_number: 10000
+      })
+
       const newUser = {
         role_id: req.body.role_id,
-        patient_id: req.body.patient_id,
+        patient_id: patient.id,
         professional_id: req.body.professional_id,
         first_name: req.body.first_name,
         middle_name: req.body.middle_name,
@@ -26,12 +30,16 @@ module.exports = class UserCtrl {
         email: req.body.email,
         password_hash: req.body.password_hash
       }
+
+      console.log(patient)
+
       const response = await tbl_User.create(newUser)
 
       return res.status(201).json({
         sucess: true,
         message: 'Sucess! - User added successfully!',
-        user: response.id
+        user: response.id,
+        patient
       })
     } catch (error) {
       return res.status(500).json({

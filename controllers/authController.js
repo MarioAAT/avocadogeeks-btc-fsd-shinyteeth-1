@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 // Import jsonwebtoken (JWTs) package to support authorization and information exchange
 const jwt = require('jsonwebtoken')
 // Import Sequelize models used
-const { tbl_User } = require('../models/index')
+const { tbl_User, tbl_Patient } = require('../models/index')
 
 module.exports = class AuthCtrl {
 // Sign-UP : Users (patients) selfservice registration first step
@@ -20,8 +20,13 @@ module.exports = class AuthCtrl {
       // Generate password HASH using bCrypt method
       const password_hash = bcrypt.hashSync(password, 10)
 
+      const patient = await tbl_Patient.create({
+        ehr_number: 10000
+      })
+
       // Create new user register in database
       const user = await tbl_User.create({
+        patient_id: patient.id,
         role_id: 2,
         email,
         password_hash
